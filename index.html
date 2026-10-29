@@ -6,26 +6,30 @@
 <title>광명시 공시지가 검증 대시보드</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-#map{height:400px;border:1px solid #ddd;border-radius:10px}
-
-body{font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;margin:0;background:#f6f7f9;color:#222}
-header{background:#0b3d66;color:#fff;padding:20px 24px}
-header h1{margin:0 0 6px;font-size:22px}
-header p{margin:0;opacity:.9}
-main{padding:20px 24px;max-width:1200px;margin:0 auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
-.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px}
-.card b{font-size:24px;display:block}
-.note{background:#fff7e6;border:1px solid #f0c36b;border-radius:10px;padding:14px;margin:16px 0}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-.controls input,.controls select{padding:8px 10px;font-size:14px}
-table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
-th,td{border:1px solid #ddd;padding:6px 8px;text-align:left;white-space:nowrap}
-th{background:#eef3f7}
-td.pnu{font-family:monospace}
-tr.bad{background:#fff0f0}
-section{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;margin:16px 0}
-ul{line-height:1.7}
+*{box-sizing:border-box}
+body{font-family:"Pretendard",system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;margin:0;background:#eef1f6;color:#1e293b;line-height:1.6}
+header{background:linear-gradient(135deg,#0f2a4d 0%,#155e75 55%,#0e7490 100%);color:#fff;padding:32px 24px 28px}
+header h1{margin:0 0 8px;font-size:28px;letter-spacing:-.5px}
+header p{margin:0;opacity:.92;font-size:15px}
+main{padding:24px;max-width:1180px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:20px 0}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px;box-shadow:0 4px 18px rgba(15,42,77,.06)}
+.card b{font-size:26px;display:block;color:#0f2a4d;letter-spacing:-.5px;margin:4px 0}
+#map{height:420px;border-radius:16px;box-shadow:0 4px 18px rgba(15,42,77,.08)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(15,42,77,.05)}
+.controls input,.controls select{padding:9px 12px;font-size:14px;border:1px solid #cbd5e1;border-radius:999px;background:#f8fafc}
+.controls input:focus,.controls select:focus{outline:2px solid #0e7490;border-color:#0e7490;background:#fff}
+.tablewrap{background:#fff;border:1px solid #e2e8f0;border-radius:16px;overflow:auto;box-shadow:0 4px 18px rgba(15,42,77,.06)}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;font-size:13px;min-width:1100px}
+th,td{padding:9px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid #eef2f7}
+th{background:#0f2a4d;color:#fff;position:sticky;top:0}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody tr:hover{background:#ecfeff}
+td.pnu{font-family:ui-monospace,monospace;font-size:12px}
+tr.bad{background:#fff1f2 !important}
+section{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 22px;margin:20px 0;box-shadow:0 4px 18px rgba(15,42,77,.05)}
+section h2{margin-top:0;font-size:19px;letter-spacing:-.4px;color:#0f2a4d}
+ul{line-height:1.8}
 </style>
 </head>
 <body>
@@ -70,10 +74,10 @@ ul{line-height:1.7}
 <span id="count"></span>
 </div>
 
-<table>
+<div class="tablewrap"><table>
 <thead><tr><th>연번</th><th>PNU (19자리 글자)</th><th>소재지</th><th>법정동</th><th>지번</th><th>지목</th><th>면적(㎡)</th><th>용도지역</th><th>공시지가 2025 (원/㎡)</th><th>공시지가 2026 (원/㎡)</th><th>증감률</th><th>검증 메모</th></tr></thead>
 <tbody id="tbody"></tbody>
-</table>
+</table></div>
 
 <section>
 <h2>이상치 목록</h2>
