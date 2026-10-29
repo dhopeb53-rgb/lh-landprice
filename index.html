@@ -80,7 +80,7 @@ button.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
 <div id="errList"></div>
 </aside>
 </div>
-<p class="foot">가상 데이터입니다. 배경 지도 © OpenStreetMap contributors © CARTO. 동 폴리곤은 개략 표시입니다.</p>
+<p class="foot">가상 데이터입니다. 배경 지도 OpenFreeMap © OpenMapTiles © OpenStreetMap contributors. 동 폴리곤은 개략 표시입니다.</p>
 </div>
 <script>
 const DONGS = [{"동": "가학동", "행수": 40, "계산행수": 40, "이상치": 1, "평균증감률": 2.54, "오류비율": 2.5, "평균공시지가": 1432235, "lat": 37.41395, "lng": 126.85795}, {"동": "광명동", "행수": 61, "계산행수": 61, "이상치": 2, "평균증감률": 2.38, "오류비율": 3.3, "평균공시지가": 4528898, "lat": 37.47774, "lng": 126.85269}, {"동": "노온사동", "행수": 40, "계산행수": 39, "이상치": 2, "평균증감률": 1.34, "오류비율": 5.0, "평균공시지가": 999398, "lat": 37.43776, "lng": 126.84825}, {"동": "소하동", "행수": 56, "계산행수": 56, "이상치": 6, "평균증감률": 2.32, "오류비율": 10.7, "평균공시지가": 3624593, "lat": 37.43957, "lng": 126.87929}, {"동": "옥길동", "행수": 35, "계산행수": 35, "이상치": 2, "평균증감률": 1.36, "오류비율": 5.7, "평균공시지가": 1640052, "lat": 37.466, "lng": 126.83864}, {"동": "일직동", "행수": 50, "계산행수": 47, "이상치": 3, "평균증감률": 0.87, "오류비율": 6.0, "평균공시지가": 4068661, "lat": 37.42025, "lng": 126.88277}, {"동": "철산동", "행수": 60, "계산행수": 58, "이상치": 2, "평균증감률": 3.99, "오류비율": 3.3, "평균공시지가": 5968755, "lat": 37.47764, "lng": 126.86774}, {"동": "하안동", "행수": 60, "계산행수": 60, "이상치": 0, "평균증감률": 1.41, "오류비율": 0.0, "평균공시지가": 4124411, "lat": 37.46249, "lng": 126.87659}];
@@ -169,10 +169,7 @@ document.getElementById('btnLight').addEventListener('click', ()=>{
   document.getElementById('btnLight').textContent = dark ? '어둡게' : '밝게';
   if(window._map){ setBaseStyle(); }
 });
-function baseStyle(dark){
-  const tiles = dark ? 'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png' : 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
-  return {version:8, sources:{base:{type:'raster', tiles:[tiles], tileSize:256, attribution:'© OpenStreetMap © CARTO'}}, layers:[{id:'base', type:'raster', source:'base'}]};
-}
+function baseStyle(dark){ return dark ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/liberty'; }
 function setBaseStyle(){
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
   window._map.setStyle(baseStyle(dark));
@@ -212,7 +209,7 @@ renderStats(); renderBars(); renderErrors();
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 try{
-  window._map = new maplibregl.Map({container:'map', style:{version:8, sources:{base:{type:'raster', tiles:['https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'], tileSize:256, attribution:'© OpenStreetMap © CARTO'}}, layers:[{id:'base', type:'raster', source:'base'}]}, center:[126.86, 37.45], zoom:11.5, pitch:60, bearing:-15});
+  window._map = new maplibregl.Map({container:'map', style:'https://tiles.openfreemap.org/styles/dark', center:[126.86, 37.45], zoom:11.5, pitch:60, bearing:-15});
   window._map.on('load', addLayers);
   window._map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 }catch(e){}
