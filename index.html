@@ -102,7 +102,7 @@ function heightFor(v, arr){
   const vals = arr.map(metricVal).sort((a,b)=>a-b);
   const min = vals[0], max = vals[vals.length-1];
   if(max===min) return 50;
-  return 20 + (v-min)/(max-min)*180;
+  return 20 + (v-min)/(max-min)*120;
 }
 function renderStats(){
   const list = selected ? DONGS.filter(s=>s['동']===selected) : DONGS;
@@ -160,7 +160,7 @@ document.querySelectorAll('.metric').forEach(b=>b.addEventListener('click', ()=>
 }));
 document.getElementById('btn3d').addEventListener('click', (e)=>{
   is3d = !is3d; e.target.classList.toggle('active', is3d);
-  if(window._map){ window._map.easeTo({pitch: is3d ? 60 : 0}); applyMetricPaint(); }
+  if(window._map){ window._map.easeTo({pitch: is3d ? 45 : 0, bearing: 0}); applyMetricPaint(); }
 });
 document.getElementById('btnLight').addEventListener('click', ()=>{
   const html = document.documentElement;
@@ -209,7 +209,7 @@ renderStats(); renderBars(); renderErrors();
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 try{
-  window._map = new maplibregl.Map({container:'map', style:'https://tiles.openfreemap.org/styles/dark', center:[126.86, 37.45], zoom:11.5, pitch:60, bearing:-15});
+  window._map = new maplibregl.Map({container:'map', style:'https://tiles.openfreemap.org/styles/dark', center:[126.86, 37.45], zoom:12, pitch:45, bearing:0});
   window._map.on('load', addLayers);
   window._map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 }catch(e){}
