@@ -15,7 +15,7 @@ main{padding:24px;max-width:1180px;margin:0 auto}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:20px 0}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px;box-shadow:0 4px 18px rgba(15,42,77,.06)}
 .card b{font-size:26px;display:block;color:#0f2a4d;letter-spacing:-.5px;margin:4px 0}
-#map{height:420px;border-radius:16px;box-shadow:0 4px 18px rgba(15,42,77,.08)}
+#map{height:520px;border-radius:16px;box-shadow:0 4px 18px rgba(15,42,77,.08)}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(15,42,77,.05)}
 .controls input,.controls select{padding:9px 12px;font-size:14px;border:1px solid #cbd5e1;border-radius:999px;background:#f8fafc}
 .controls input:focus,.controls select:focus{outline:2px solid #0e7490;border-color:#0e7490;background:#fff}
@@ -30,6 +30,8 @@ tr.bad{background:#fff1f2 !important}
 section{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 22px;margin:20px 0;box-shadow:0 4px 18px rgba(15,42,77,.05)}
 section h2{margin-top:0;font-size:19px;letter-spacing:-.4px;color:#0f2a4d}
 ul{line-height:1.8}
+.dong-label{background:transparent;border:none;text-align:center}
+.dong-label div{border:2px solid #fff;border-radius:10px;padding:3px 6px;font-size:12px;font-weight:700;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,.3);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -47,11 +49,10 @@ ul{line-height:1.8}
 
 <section>
 <h2>지도 시각화 — 광명시 OpenStreetMap + 법정동별 평균 증감률</h2>
-<p>실습 csv에는 필지별 위도·경도가 없어서, 필지 위치를 임의로 찍지 않았습니다. 지도는 광명시 중심(OpenStreetMap, 좌표는 지오코딩으로 확인한 광명시 37.42636, 126.90352)을 보여주고, 아래 카드가 법정동별 평균 증감률을 색으로 표시합니다. 색이 진할수록 평균 증감률이 큽니다.</p>
+<p>시각화는 지도 안에서 바로 됩니다. 원의 색 = 법정동별 평균 증감률(진할수록 큼), 원의 크기 = 해당 동 행수입니다. 원을 누르면 아래 표가 그 동만 표시됩니다. 단, 실습 csv에 필지 좌표와 동 중심 좌표가 없어서, 원의 위치는 동별 비교를 위한 개략 배치이지 실제 동 중심이 아닙니다. 필지 위치를 임의로 찍지 않았습니다.</p>
 <div id="map">지도를 불러오려면 인터넷이 필요합니다.</div>
 <p id="mapDongInfo">동을 선택하면 여기에 해당 동의 요약이 표시됩니다. 아래 동 카드를 누르거나, 표 위 법정동 필터를 바꾸면 표도 함께 바뀝니다.</p>
-<div class="cards"><div class="card" style="border-left:8px solid #c62828;cursor:pointer" onclick="selectDong('철산동')"><b>철산동</b>60행 (증감률 계산 58행, 이상치 2행)<br>2025 평균 5,738,736원/㎡<br>2026 평균 5,968,755원/㎡<br>평균 증감률 +4.01%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('광명동')"><b>광명동</b>61행 (증감률 계산 61행, 이상치 2행)<br>2025 평균 4,404,669원/㎡<br>2026 평균 4,528,899원/㎡<br>평균 증감률 +2.82%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('가학동')"><b>가학동</b>40행 (증감률 계산 40행, 이상치 1행)<br>2025 평균 1,396,960원/㎡<br>2026 평균 1,432,235원/㎡<br>평균 증감률 +2.53%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('소하동')"><b>소하동</b>56행 (증감률 계산 56행, 이상치 6행)<br>2025 평균 3,548,773원/㎡<br>2026 평균 3,624,594원/㎡<br>평균 증감률 +2.14%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #f9a825;cursor:pointer" onclick="selectDong('옥길동')"><b>옥길동</b>35행 (증감률 계산 35행, 이상치 2행)<br>2025 평균 1,611,374원/㎡<br>2026 평균 1,640,053원/㎡<br>평균 증감률 +1.78%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('일직동')"><b>일직동</b>50행 (증감률 계산 47행, 이상치 3행)<br>2025 평균 4,035,136원/㎡<br>2026 평균 4,068,662원/㎡<br>평균 증감률 +0.83%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('노온사동')"><b>노온사동</b>40행 (증감률 계산 39행, 이상치 2행)<br>2025 평균 991,728원/㎡<br>2026 평균 999,399원/㎡<br>평균 증감률 +0.77%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('하안동')"><b>하안동</b>60행 (증감률 계산 60행, 이상치 0행)<br>2025 평균 4,097,580원/㎡<br>2026 평균 4,124,411원/㎡<br>평균 증감률 +0.65%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div></div>
-<p style="color:#666">범례: +4% 이상 진한 빨강, +2% 이상 주황, +1% 이상 노랑, +1% 미만 초록. 증감률 계산에서는 2026 값이 비어 있거나 자릿수가 잘린 행을 제외했습니다.</p>
+<p style="color:#666">범례는 지도 오른쪽 아래에도 표시됩니다: +4% 이상 진한 빨강, +2% 이상 주황, +1% 이상 노랑, +1% 미만 초록. 증감률 계산에서는 2026 값이 비어 있거나 자릿수가 잘린 행을 제외했습니다.</p>
 </section>
 
 <section>
@@ -138,5 +139,22 @@ dongSel.addEventListener('change', ()=>{ if(dongSel.value) selectDong(dongSel.va
 document.getElementById('onlyBad').addEventListener('change', render);
 render();
 </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>try{var m=L.map("map").setView([37.42636,126.90352],12);L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(m);L.marker([37.42636,126.90352]).addTo(m).bindPopup("광명시 중심<br>실습 데이터 402행, 법정동 8개").openPopup();}catch(e){}</script></body>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>try{
+var m=L.map("map").setView([37.42636,126.90352],12);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(m);
+// 개략 배치: 실제 동 중심이 아님. 동별 비교를 위해 광명시 중심 주변에 배치.
+var OFF={"광명동":[0.018,-0.018],"철산동":[0.018,0.012],"하안동":[-0.005,-0.005],"소하동":[-0.022,0.008],"일직동":[-0.018,0.022],"노온사동":[0.005,-0.025],"가학동":[-0.028,-0.018],"옥길동":[0.025,0.020]};
+DONG_STATS.forEach(function(s){
+  var o=OFF[s["동"]]||[0,0];
+  var lat=37.42636+o[0], lon=126.90352+o[1];
+  L.circleMarker([lat,lon],{radius:14+s["행수"]/4,color:"#fff",weight:2,fillColor:s["색"],fillOpacity:0.85}).addTo(m)
+    .bindPopup(s["동"]+" · "+s["행수"]+"행 · 평균 증감률 +"+s["증감률"]+"% · 이상치 "+s["이상치"]+"행")
+    .on("click",function(){ selectDong(s["동"]); });
+  var icon=L.divIcon({className:"dong-label",html:'<div style="background:'+s["색"]+'">'+s["동"]+'<br>+'+s["증감률"]+'%</div>',iconSize:null,iconAnchor:[35,18]});
+  L.marker([lat,lon],{icon:icon,interactive:false}).addTo(m);
+});
+var legend=L.control({position:"bottomright"});
+legend.onAdd=function(){var d=L.DomUtil.create("div");d.style.background="#fff";d.style.padding="10px 12px";d.style.borderRadius="10px";d.style.fontSize="12px";d.style.lineHeight="1.7";d.style.boxShadow="0 2px 8px rgba(0,0,0,.2)";d.innerHTML='<b>평균 증감률</b><br><span style="color:#c62828">●</span> +4% 이상<br><span style="color:#ef6c00">●</span> +2% 이상<br><span style="color:#f9a825">●</span> +1% 이상<br><span style="color:#66bb6a">●</span> +1% 미만<br><small>원 크기 = 행수<br>위치는 개략 배치</small>';return d;};
+legend.addTo(m);
+}catch(e){}</script></body>
 </html>
