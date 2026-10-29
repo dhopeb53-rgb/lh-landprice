@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>광명시 공시지가 검증 대시보드</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
+#map{height:400px;border:1px solid #ddd;border-radius:10px}
+
 body{font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;margin:0;background:#f6f7f9;color:#222}
 header{background:#0b3d66;color:#fff;padding:20px 24px}
 header h1{margin:0 0 6px;font-size:22px}
@@ -50,6 +53,14 @@ ul{line-height:1.7}
 <li>소재지 오타 의심 2건: 연번 201 (광면시), 연번 295 (노온사등)</li>
 </ul>
 <p>자세한 이상치 목록은 표 아래에서 확인할 수 있습니다.</p>
+</section>
+
+<section>
+<h2>지도 — 광명시 OpenStreetMap + 법정동별 평균 증감률</h2>
+<p>실습 csv에는 필지별 위도·경도가 없어서, 필지 위치를 임의로 찍지 않았습니다. 지도는 광명시 중심(OpenStreetMap, 좌표는 지오코딩으로 확인한 광명시 37.42636, 126.90352)을 보여주고, 아래 카드가 법정동별 평균 증감률을 색으로 표시합니다. 색이 진할수록 평균 증감률이 큽니다.</p>
+<div id="map">지도를 불러오려면 인터넷이 필요합니다.</div>
+<div class="cards"><div class="card" style="border-left:8px solid #c62828"><b>철산동</b>60행 (증감률 계산 58행)<br>2025 평균 5,738,736원/㎡<br>2026 평균 5,968,755원/㎡<br>평균 증감률 +4.01%</div><div class="card" style="border-left:8px solid #ef6c00"><b>광명동</b>61행 (증감률 계산 61행)<br>2025 평균 4,404,669원/㎡<br>2026 평균 4,528,899원/㎡<br>평균 증감률 +2.82%</div><div class="card" style="border-left:8px solid #ef6c00"><b>가학동</b>40행 (증감률 계산 40행)<br>2025 평균 1,396,960원/㎡<br>2026 평균 1,432,235원/㎡<br>평균 증감률 +2.53%</div><div class="card" style="border-left:8px solid #ef6c00"><b>소하동</b>56행 (증감률 계산 56행)<br>2025 평균 3,548,773원/㎡<br>2026 평균 3,624,594원/㎡<br>평균 증감률 +2.14%</div><div class="card" style="border-left:8px solid #f9a825"><b>옥길동</b>35행 (증감률 계산 35행)<br>2025 평균 1,611,374원/㎡<br>2026 평균 1,640,053원/㎡<br>평균 증감률 +1.78%</div><div class="card" style="border-left:8px solid #66bb6a"><b>일직동</b>50행 (증감률 계산 47행)<br>2025 평균 4,035,136원/㎡<br>2026 평균 4,068,662원/㎡<br>평균 증감률 +0.83%</div><div class="card" style="border-left:8px solid #66bb6a"><b>노온사동</b>40행 (증감률 계산 39행)<br>2025 평균 991,728원/㎡<br>2026 평균 999,399원/㎡<br>평균 증감률 +0.77%</div><div class="card" style="border-left:8px solid #66bb6a"><b>하안동</b>60행 (증감률 계산 60행)<br>2025 평균 4,097,580원/㎡<br>2026 평균 4,124,411원/㎡<br>평균 증감률 +0.65%</div></div>
+<p style="color:#666">범례: +4% 이상 진한 빨강, +2% 이상 주황, +1% 이상 노랑, +1% 미만 초록. 증감률 계산에서는 2026 값이 비어 있거나 자릿수가 잘린 행을 제외했습니다.</p>
 </section>
 
 <div class="controls">
@@ -115,5 +126,5 @@ dongSel.addEventListener('change', render);
 document.getElementById('onlyBad').addEventListener('change', render);
 render();
 </script>
-</body>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>try{var m=L.map("map").setView([37.42636,126.90352],12);L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(m);L.marker([37.42636,126.90352]).addTo(m).bindPopup("광명시 중심<br>실습 데이터 402행, 법정동 8개").openPopup();}catch(e){}</script></body>
 </html>
