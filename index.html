@@ -46,6 +46,15 @@ ul{line-height:1.8}
 </div>
 
 <section>
+<h2>지도 시각화 — 광명시 OpenStreetMap + 법정동별 평균 증감률</h2>
+<p>실습 csv에는 필지별 위도·경도가 없어서, 필지 위치를 임의로 찍지 않았습니다. 지도는 광명시 중심(OpenStreetMap, 좌표는 지오코딩으로 확인한 광명시 37.42636, 126.90352)을 보여주고, 아래 카드가 법정동별 평균 증감률을 색으로 표시합니다. 색이 진할수록 평균 증감률이 큽니다.</p>
+<div id="map">지도를 불러오려면 인터넷이 필요합니다.</div>
+<p id="mapDongInfo">동을 선택하면 여기에 해당 동의 요약이 표시됩니다. 아래 동 카드를 누르거나, 표 위 법정동 필터를 바꾸면 표도 함께 바뀝니다.</p>
+<div class="cards"><div class="card" style="border-left:8px solid #c62828;cursor:pointer" onclick="selectDong('철산동')"><b>철산동</b>60행 (증감률 계산 58행, 이상치 2행)<br>2025 평균 5,738,736원/㎡<br>2026 평균 5,968,755원/㎡<br>평균 증감률 +4.01%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('광명동')"><b>광명동</b>61행 (증감률 계산 61행, 이상치 2행)<br>2025 평균 4,404,669원/㎡<br>2026 평균 4,528,899원/㎡<br>평균 증감률 +2.82%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('가학동')"><b>가학동</b>40행 (증감률 계산 40행, 이상치 1행)<br>2025 평균 1,396,960원/㎡<br>2026 평균 1,432,235원/㎡<br>평균 증감률 +2.53%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #ef6c00;cursor:pointer" onclick="selectDong('소하동')"><b>소하동</b>56행 (증감률 계산 56행, 이상치 6행)<br>2025 평균 3,548,773원/㎡<br>2026 평균 3,624,594원/㎡<br>평균 증감률 +2.14%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #f9a825;cursor:pointer" onclick="selectDong('옥길동')"><b>옥길동</b>35행 (증감률 계산 35행, 이상치 2행)<br>2025 평균 1,611,374원/㎡<br>2026 평균 1,640,053원/㎡<br>평균 증감률 +1.78%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('일직동')"><b>일직동</b>50행 (증감률 계산 47행, 이상치 3행)<br>2025 평균 4,035,136원/㎡<br>2026 평균 4,068,662원/㎡<br>평균 증감률 +0.83%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('노온사동')"><b>노온사동</b>40행 (증감률 계산 39행, 이상치 2행)<br>2025 평균 991,728원/㎡<br>2026 평균 999,399원/㎡<br>평균 증감률 +0.77%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div><div class="card" style="border-left:8px solid #66bb6a;cursor:pointer" onclick="selectDong('하안동')"><b>하안동</b>60행 (증감률 계산 60행, 이상치 0행)<br>2025 평균 4,097,580원/㎡<br>2026 평균 4,124,411원/㎡<br>평균 증감률 +0.65%<br><small>카드를 누르면 아래 표가 해당 동만 표시됩니다</small></div></div>
+<p style="color:#666">범례: +4% 이상 진한 빨강, +2% 이상 주황, +1% 이상 노랑, +1% 미만 초록. 증감률 계산에서는 2026 값이 비어 있거나 자릿수가 잘린 행을 제외했습니다.</p>
+</section>
+
+<section>
 <h2>검증 요약 — 이 데이터에서 확인된 것</h2>
 <p>이 대시보드는 값을 고치거나 빈칸을 채우지 않습니다. 이상치는 표에서 분홍색으로 표시하고, 증감률은 정상 값일 때만 계산합니다.</p>
 <ul>
@@ -57,14 +66,6 @@ ul{line-height:1.8}
 <li>소재지 오타 의심 2건: 연번 201 (광면시), 연번 295 (노온사등)</li>
 </ul>
 <p>자세한 이상치 목록은 표 아래에서 확인할 수 있습니다.</p>
-</section>
-
-<section>
-<h2>지도 — 광명시 OpenStreetMap + 법정동별 평균 증감률</h2>
-<p>실습 csv에는 필지별 위도·경도가 없어서, 필지 위치를 임의로 찍지 않았습니다. 지도는 광명시 중심(OpenStreetMap, 좌표는 지오코딩으로 확인한 광명시 37.42636, 126.90352)을 보여주고, 아래 카드가 법정동별 평균 증감률을 색으로 표시합니다. 색이 진할수록 평균 증감률이 큽니다.</p>
-<div id="map">지도를 불러오려면 인터넷이 필요합니다.</div>
-<div class="cards"><div class="card" style="border-left:8px solid #c62828"><b>철산동</b>60행 (증감률 계산 58행)<br>2025 평균 5,738,736원/㎡<br>2026 평균 5,968,755원/㎡<br>평균 증감률 +4.01%</div><div class="card" style="border-left:8px solid #ef6c00"><b>광명동</b>61행 (증감률 계산 61행)<br>2025 평균 4,404,669원/㎡<br>2026 평균 4,528,899원/㎡<br>평균 증감률 +2.82%</div><div class="card" style="border-left:8px solid #ef6c00"><b>가학동</b>40행 (증감률 계산 40행)<br>2025 평균 1,396,960원/㎡<br>2026 평균 1,432,235원/㎡<br>평균 증감률 +2.53%</div><div class="card" style="border-left:8px solid #ef6c00"><b>소하동</b>56행 (증감률 계산 56행)<br>2025 평균 3,548,773원/㎡<br>2026 평균 3,624,594원/㎡<br>평균 증감률 +2.14%</div><div class="card" style="border-left:8px solid #f9a825"><b>옥길동</b>35행 (증감률 계산 35행)<br>2025 평균 1,611,374원/㎡<br>2026 평균 1,640,053원/㎡<br>평균 증감률 +1.78%</div><div class="card" style="border-left:8px solid #66bb6a"><b>일직동</b>50행 (증감률 계산 47행)<br>2025 평균 4,035,136원/㎡<br>2026 평균 4,068,662원/㎡<br>평균 증감률 +0.83%</div><div class="card" style="border-left:8px solid #66bb6a"><b>노온사동</b>40행 (증감률 계산 39행)<br>2025 평균 991,728원/㎡<br>2026 평균 999,399원/㎡<br>평균 증감률 +0.77%</div><div class="card" style="border-left:8px solid #66bb6a"><b>하안동</b>60행 (증감률 계산 60행)<br>2025 평균 4,097,580원/㎡<br>2026 평균 4,124,411원/㎡<br>평균 증감률 +0.65%</div></div>
-<p style="color:#666">범례: +4% 이상 진한 빨강, +2% 이상 주황, +1% 이상 노랑, +1% 미만 초록. 증감률 계산에서는 2026 값이 비어 있거나 자릿수가 잘린 행을 제외했습니다.</p>
 </section>
 
 <div class="controls">
@@ -125,8 +126,15 @@ function render(){
   });
   document.getElementById('count').textContent = n + '행 표시 중';
 }
+const DONG_STATS = [{"동": "가학동", "행수": 40, "계산행수": 40, "평균2025": 1396960, "평균2026": 1432235, "증감률": 2.53, "색": "#ef6c00", "이상치": 1}, {"동": "광명동", "행수": 61, "계산행수": 61, "평균2025": 4404669, "평균2026": 4528899, "증감률": 2.82, "색": "#ef6c00", "이상치": 2}, {"동": "노온사동", "행수": 40, "계산행수": 39, "평균2025": 991728, "평균2026": 999399, "증감률": 0.77, "색": "#66bb6a", "이상치": 2}, {"동": "소하동", "행수": 56, "계산행수": 56, "평균2025": 3548773, "평균2026": 3624594, "증감률": 2.14, "색": "#ef6c00", "이상치": 6}, {"동": "옥길동", "행수": 35, "계산행수": 35, "평균2025": 1611374, "평균2026": 1640053, "증감률": 1.78, "색": "#f9a825", "이상치": 2}, {"동": "일직동", "행수": 50, "계산행수": 47, "평균2025": 4035136, "평균2026": 4068662, "증감률": 0.83, "색": "#66bb6a", "이상치": 3}, {"동": "철산동", "행수": 60, "계산행수": 58, "평균2025": 5738736, "평균2026": 5968755, "증감률": 4.01, "색": "#c62828", "이상치": 2}, {"동": "하안동", "행수": 60, "계산행수": 60, "평균2025": 4097580, "평균2026": 4124411, "증감률": 0.65, "색": "#66bb6a", "이상치": 0}];
+function selectDong(d){
+  dongSel.value=d; render();
+  const s=DONG_STATS.find(x=>x['동']===d);
+  if(s){ document.getElementById('mapDongInfo').textContent = d+' · '+s['행수']+'행 · 2025 평균 '+s['평균2025'].toLocaleString()+'원/㎡ · 2026 평균 '+s['평균2026'].toLocaleString()+'원/㎡ · 평균 증감률 +'+s['증감률']+'% · 이상치 '+s['이상치']+'행'; }
+  document.getElementById('tbody').scrollIntoView({behavior:'smooth'});
+}
 document.getElementById('q').addEventListener('input', render);
-dongSel.addEventListener('change', render);
+dongSel.addEventListener('change', ()=>{ if(dongSel.value) selectDong(dongSel.value); else render(); });
 document.getElementById('onlyBad').addEventListener('change', render);
 render();
 </script>
